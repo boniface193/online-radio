@@ -1,39 +1,11 @@
 <a name="readme-top"></a>
 
-<!--
-!!! IMPORTANT !!!
-This README is an example of how you could professionally present your codebase. 
-Writing documentation is a crucial part of your work as a professional software developer and cannot be ignored. 
-
-You should modify this file to match your project and remove sections that don't apply.
-
-REQUIRED SECTIONS:
-- Table of Contents
-- About the Project
-  - Built With
-  - Live Demo
-- Getting Started
-- Authors
-- Future Features
-- Contributing
-- Show your support
-- Acknowledgements
-- License
-
-OPTIONAL SECTIONS:
-- FAQ
-
-After you're finished please remove all the comments and instructions!
-
-For more information on the importance of a professional README for your repositories: https://github.com/microverseinc/curriculum-transversal-skills/blob/main/documentation/articles/readme_best_practices.md
--->
-
 <div align="center">
   <!-- You are encouraged to replace this logo with your own! Otherwise you can also remove it. -->
   <img src="murple_logo.png" alt="logo" width="140"  height="auto" />
   <br/>
 
-  <h3><b>Microverse README Template</b></h3>
+  <h3><b>Online Radio</b></h3>
 
 </div>
 
@@ -63,36 +35,36 @@ For more information on the importance of a professional README for your reposit
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [your_project_name] <a name="about-project"></a>
+# 📖 [Online_Radio] <a name="about-project"></a>
 
-> Describe your project in 1 or 2 sentences.
+> This is one of the largest collection of FM Radios API from around the world. Listen Updated 79,000+ Radio stations. All the Stations are Updating Daily & Weekly basis, New stations are Adding As soon as possible. At least 100+ Stations Are adding and 1000+ Stations are fixing to this API Weekly (This is minium ratio).
 
-**[your_project__name]** is a...
+**[Online_Radio]** still working on it to improve in future.
 
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
 
-> Describe the tech stack and include only the relevant sections that apply to your project.
+> The tech stack includes
 
 <details>
-  <summary>Client</summary>
+  <summary>React</summary>
   <ul>
     <li><a href="https://reactjs.org/">React.js</a></li>
   </ul>
 </details>
 
 <details>
-  <summary>Server</summary>
+  <summary>Netlify</summary>
   <ul>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
+    <li><a href="https://app.netlify.com/">Netlify</a></li>
   </ul>
 </details>
 
 <details>
-<summary>Database</summary>
+<summary>Tailwind CSS</summary>
   <ul>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
+    <li><a href="https://www.tailwindcss.com/">Tailwind</a></li>
   </ul>
 </details>
 
@@ -100,11 +72,11 @@ For more information on the importance of a professional README for your reposit
 
 ### Key Features <a name="key-features"></a>
 
-> Describe between 1-3 key features of the application.
+> Some of the Key features of the application.
 
-- **[key_feature_1]**
-- **[key_feature_2]**
-- **[key_feature_3]**
+- **[Searching_fm]**
+- **[view_worlds_radoi_station]**
+- **[All_country]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -114,7 +86,7 @@ For more information on the importance of a professional README for your reposit
 
 > Add a link to your deployed project.
 
-- [Live Demo Link](https://google.com)
+- [Live Demo Link](https://earnest-tulumba-f3a6ec.netlify.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -122,75 +94,73 @@ For more information on the importance of a professional README for your reposit
 
 ## 💻 Getting Started <a name="getting-started"></a>
 
-> Describe how a new developer could make use of your project.
+> This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-To get a local copy up and running, follow these steps.
+In the project directory, you can run:
 
-### Prerequisites
+### `npm start`
 
-In order to run this project you need:
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-<!--
-Example command:
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-```sh
- gem install rails
-```
- -->
+### `npm test`
 
-### Setup
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-Clone this repository to your desired folder:
+### `npm run build`
 
-<!--
-Example commands:
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-```sh
-  cd my-folder
-  git clone git@github.com:myaccount/my-project.git
-```
---->
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-### Install
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-Install this project with:
+### `npm run eject`
 
-<!--
-Example command:
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-```sh
-  cd my-project
-  gem install
-```
---->
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-### Usage
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-To run the project, execute the following command:
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-<!--
-Example command:
+## Learn More
 
-```sh
-  rails server
-```
---->
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-### Run tests
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-To run tests, run the following command:
+### Code Splitting
 
-<!--
-Example command:
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-```sh
-  bin/rails test test/models/article_test.rb
-```
---->
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
 ### Deployment
 
-You can deploy this project using:
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
 
 <!--
 Example:
@@ -210,15 +180,9 @@ Example:
 
 👤 **Author1**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
-
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@boniface193](https://github.com/boniface193)
+- Twitter: [@bidtechnologies](https://twitter.com/bidtechnologies)
+- LinkedIn: [boniface-ikechukwu](https://www.linkedin.com/in/boniface-ikechukwu/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -226,11 +190,11 @@ Example:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-> Describe 1 - 3 features you will add to the project.
+> Features that will be included in the future include
 
-- [ ] **[new_feature_1]**
-- [ ] **[new_feature_2]**
-- [ ] **[new_feature_3]**
+- [ ] **[custom_buttons]**
+- [ ] **[Notes]**
+- [ ] **[scheduling_program_time]**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
