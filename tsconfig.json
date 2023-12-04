@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "es5", /* Specify ECMAScript target version: 'ES5' (default), 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ], /* Specify library files to be included in the compilation. */
+    "jsx": "react", /* Enable JSX support, assuming you are using React. */
+    "module": "commonjs", /* Specify module system: 'commonjs', 'amd', 'system', 'umd', 'es6', 'es2015', or 'ESNext'. */
+    "moduleResolution": "node", /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+    "esModuleInterop": true, /* Enable/disable emitting use of `import` helpers (e.g. `import * as fs from 'fs';`) as default import. */
+    "rootDir": "src", /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
+    "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
+    "strict": true, /* Enable all strict type-checking options. */
+    "skipLibCheck": true, /* Skip type checking of declaration files. */
+    "allowJs": true, /* Allow JavaScript files to be compiled. */
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ], /* Specify files to include in the compilation. */
+  "exclude": [
+    "node_modules"
+  ] /* Specify files to exclude from the compilation. */
+}
