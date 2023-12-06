@@ -23,18 +23,16 @@ export const fetchSearch: any = createAsyncThunk('search/fetchSearch', async (ar
 
 interface searchState {
   data: any[],
-  currentPage: number,
   rows: number,
-  totalPage: any[],
+  lessThan10: boolean,
   status: string,
   loading: boolean
 }
 
 const initialState: searchState = {
   data: [],
-  currentPage: 1,
   rows: 10,
-  totalPage: ['1', '2', '3', '4'],
+  lessThan10: false,
   status: "",
   loading: false
 }
@@ -43,11 +41,8 @@ const searchSlice = createSlice({
   name: 'getSearch',
   initialState,
   reducers: {
-    incrementCurrentPage: (state) => {
-      if (state.currentPage <= state.totalPage.length - 1) {
-        state.currentPage++;
+    loadMore: (state) => {
         state.rows += 10
-      }
     },
   },
   extraReducers(builder) {
@@ -57,6 +52,9 @@ const searchSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchSearch.fulfilled, (state, { payload }) => {
+        if (payload.data.length > 9) {
+          state.lessThan10 = true
+        }
         state.data = payload.data;
         state.loading = false;
       })
@@ -68,4 +66,4 @@ const searchSlice = createSlice({
 })
 
 export default searchSlice.reducer;
-export const { incrementCurrentPage } = searchSlice.actions;
+export const { loadMore } = searchSlice.actions;

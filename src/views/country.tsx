@@ -43,15 +43,19 @@ const Country = () => {
 
     <div className="px-8 py-5 overflow-y-auto h-[25rem]">
       <p className="text-red-500 text-center my-8">{status}</p>
-      <Link replace to={`/`}>
-        <div className="bg-slate-200 space-x-4 flex cursor-pointer mb-4 dark:bg-slate-800 h-auto rounded-lg p-2 space-y-2 ">
-          <img src="https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/8.jpg" className="w-12" alt="search result pic" />
-          <div>
-            <p className="text-sm font-semibold capitalize">Nobis harum nam et.</p>
-            <p className="text-sm">Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-      </Link>
+      {
+        searchedCountry.map((item: any, index: number) => (
+          <Link key={index} replace to={`/`}>
+            <div className="bg-slate-200 space-x-4 flex cursor-pointer mb-4 dark:bg-slate-800 h-auto rounded-lg p-2 space-y-2 ">
+              <div>
+                <p className="text-sm font-semibold capitalize">{item.name}</p>
+                <p className="text-sm">has {item.stationcount} station count</p>
+              </div>
+            </div>
+          </Link>
+        ))
+      }
+
     </div>
   </Modal>
 }

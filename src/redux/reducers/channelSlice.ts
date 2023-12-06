@@ -58,7 +58,8 @@ const channelSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchChannels.fulfilled, (state, { payload }) => {
-        state.data = payload.data;
+        state.data = payload;
+        console.log(payload)
         state.loading = false;
       })
       .addCase(fetchChannels.rejected, (state) => {
