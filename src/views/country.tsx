@@ -49,7 +49,7 @@ const Country = () => {
             <div className="bg-slate-200 space-x-4 flex cursor-pointer mb-4 dark:bg-slate-800 h-auto rounded-lg p-2 space-y-2 ">
               <div>
                 <p className="text-sm font-semibold capitalize">{item.name}</p>
-                <p className="text-sm">has {item.stationcount} station count</p>
+                <p className="text-sm">has {item.votes} votes</p>
               </div>
             </div>
           </Link>

@@ -9,12 +9,7 @@ interface Parameters {
 export const fetchSearch: any = createAsyncThunk('search/fetchSearch', async (arg: Parameters) => {
 
   try {
-    const res = await axios.get(`/stations/byname/${arg.searchName}`, {
-      params: {
-        offset: '0',
-        limit: arg.limit,
-      },
-    });
+    const res = await axios.get(`/stations`);
     return res.data;
   } catch (error) {
     throw error;
@@ -23,6 +18,7 @@ export const fetchSearch: any = createAsyncThunk('search/fetchSearch', async (ar
 
 interface searchState {
   data: any[],
+  searchedResult: any[],
   rows: number,
   lessThan10: boolean,
   status: string,
@@ -31,6 +27,7 @@ interface searchState {
 
 const initialState: searchState = {
   data: [],
+  searchedResult: [],
   rows: 10,
   lessThan10: false,
   status: "",
@@ -41,8 +38,19 @@ const searchSlice = createSlice({
   name: 'getSearch',
   initialState,
   reducers: {
-    loadMore: (state) => {
-        state.rows += 10
+    getFormValue: (state, { payload }) => {
+      try {
+        const results = state.data.filter((item) => item.name.toLowerCase().indexOf(payload) > -1);
+        if (results.length < 1) {
+          state.status = 'Ops! Nothing'
+          state.searchedResult = [];
+        } else {
+          state.status = ''
+          state.searchedResult = results;
+        }
+      } catch (error) {
+        throw error
+      }
     },
   },
   extraReducers(builder) {
@@ -52,10 +60,7 @@ const searchSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchSearch.fulfilled, (state, { payload }) => {
-        if (payload.data.length > 9) {
-          state.lessThan10 = true
-        }
-        state.data = payload.data;
+        state.data = payload;
         state.loading = false;
       })
       .addCase(fetchSearch.rejected, (state) => {
@@ -66,4 +71,4 @@ const searchSlice = createSlice({
 })
 
 export default searchSlice.reducer;
-export const { loadMore } = searchSlice.actions;
+export const { getFormValue } = searchSlice.actions;

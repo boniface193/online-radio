@@ -3,7 +3,7 @@ import axios from '../../https.interceptors';
 
 export const fetchCountry: any = createAsyncThunk('country/fetchCountry', async () => {
   try {
-    const res = await axios.get('/countries');
+    const res = await axios.get('/stations');
     return await res.data
   } catch (error) {
     throw error;
@@ -30,10 +30,11 @@ const countrySlice = createSlice({
   reducers: {
     getFormValue: (state, { payload }) => {
       try {
-        state.searchedCountry = state.data.filter((item) => item.name.toLowerCase().indexOf(payload) > -1);
+        const results = state.data.filter((item) => item.country.toLowerCase().indexOf(payload) > -1);
         if (state.searchedCountry.length < 1) {
           state.status = 'Ops! Nothing'
         } else {
+          state.searchedCountry = results
           state.status = ''
         }
       } catch (error) {
@@ -48,7 +49,7 @@ const countrySlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchCountry.fulfilled, (state, { payload }) => {
-        state.data = payload.data;
+        state.data = payload;
         state.searchedCountry = state.data
         state.loading = false;
       })

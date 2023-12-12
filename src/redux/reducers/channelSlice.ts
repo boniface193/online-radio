@@ -1,35 +1,25 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from '../../https.interceptors';
 
-export const fetchChannels: any = createAsyncThunk('channels/fetchChennels', async (arg) => {
+export const fetchChannels: any = createAsyncThunk('channels/fetchChennels', async () => {
   try {
-    const res = await axios.get('/stations', {
-      params: {
-        offset: '0',
-        limit: arg,
-      },
-    });
-    return res.data
+    const res = await axios.get('/stations');
+    return res.data;
   } catch (error) {
     throw error;
   }
-
 });
 
 interface channelState {
   data: any[],
-  currentPage: number,
   rows: number,
-  totalPage: any[],
   status: string,
   loading: boolean
 }
 
 const initialState: channelState = {
   data: [],
-  currentPage: 1,
   rows: 10,
-  totalPage: ['1','2','3','4'],
   status: "",
   loading: true
 }
@@ -39,17 +29,15 @@ const channelSlice = createSlice({
   initialState,
   reducers: {
     incrementCurrentPage: (state) => {
-      if (state.currentPage <= state.totalPage.length - 1) {
-        state.currentPage ++;
-        state.rows += 10
-      }
+      state.rows += 10
     },
-    decreaseCurrentPage: (state) => {
-      if (state.currentPage >= 2) {
-        state.currentPage --;
-        state.rows -= 10
-      }
-    },
+    favourite: (state, { payload }) => {
+      const newState = state.data.map((item) => {
+        if (item.id !== payload) return item;
+        return { ...item, favorited: !item.favorited }
+      });
+      state.data = newState;
+    }
   },
   extraReducers(builder) {
     builder
@@ -58,8 +46,17 @@ const channelSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchChannels.fulfilled, (state, { payload }) => {
-        state.data = payload;
-        console.log(payload)
+        const newState:any = [];
+        payload.map((item: any) => newState.push({
+          name: item.name,
+          country: item.country,
+          favicon: item.favicon,
+          homepage: item.homepage,
+          url_resolved: item.url_resolved,
+          favorited: false,
+          id: item.stationuuid,
+        }));
+        state.data = newState;
         state.loading = false;
       })
       .addCase(fetchChannels.rejected, (state) => {
@@ -70,4 +67,4 @@ const channelSlice = createSlice({
 })
 
 export default channelSlice.reducer;
-export const { incrementCurrentPage, decreaseCurrentPage } = channelSlice.actions;
+export const { incrementCurrentPage, favourite } = channelSlice.actions;

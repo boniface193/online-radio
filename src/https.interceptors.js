@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://28254f58-8acc-4a01-b7e5-34083ec5e3c3.mock.pstmn.io';
+axios.defaults.baseURL = 'https://14a4e047-6941-422b-8e92-ad35854c0b39.mock.pstmn.io';
 axios.defaults.timeout = 6000;
 
 // Add a request interceptor

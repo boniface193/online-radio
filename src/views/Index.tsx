@@ -1,126 +1,75 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 import { BookMarked, Channel, Country, External, Heart, Menu, Next, Pause, Play, Previous, Search } from '../assests/icons/icons';
 import ToggleMode from '../components/toggleMode';
-
-interface Track {
-  name: string;
-  artist: string;
-  cover: string;
-  source: string;
-  url: string;
-  favorited: boolean;
-}
+import { fetchChannels, favourite } from "../redux/reducers/channelSlice";
 
 const YourComponent: React.FC = () => {
+  const dispatch = useDispatch()
+  const { data, status, loading } = useSelector((state: any) => state.channelSlice)
+
+  useEffect(() => {
+    dispatch(fetchChannels());
+  }, [dispatch]);
+
+  const [currentTrack, setCurrentTrack] = useState<any>({ favorited: false })
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [isTimerPlaying, setIsTimerPlaying] = useState<boolean>(true);
-  const [currentTrack, setCurrentTrack] = useState<any>({ favorited: false })
-  const [duration, setDuration] = useState<number>(0)
-  const [barWidth, setBarWidth] = useState<number>(0)
-  const [currentTime, setCurrentTime] = useState<number>(0)
+  const tracks = data;
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressRef = useRef<HTMLDivElement>(null);
 
-  // Assuming you have the tracks array with the same structure as in the Vue instance
-  const tracks: Track[] = [
-    // ... your track data
-    {
-      name: "Mekanın Sahibi",
-      artist: "Norm Ender",
-      cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/1.jpg",
-      source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/1.mp3",
-      url: "https://www.youtube.com/watch?v=z3wAjJXbYzA",
-      favorited: false
-    },
-    {
-      name: "Everybody Knows",
-      artist: "Leonard Cohen",
-      cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/2.jpg",
-      source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/2.mp3",
-      url: "https://www.youtube.com/watch?v=Lin-a2lTelg",
-      favorited: true
-    },
-    {
-      name: "Extreme Ways",
-      artist: "Moby",
-      cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/3.jpg",
-      source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/3.mp3",
-      url: "https://www.youtube.com/watch?v=ICjyAe9S54c",
-      favorited: false
-    },
-    {
-      name: "Butterflies",
-      artist: "Sia",
-      cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/4.jpg",
-      source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/4.mp3",
-      url: "https://www.youtube.com/watch?v=kYgGwWYOd9Y",
-      favorited: false
-    },
-    {
-      name: "The Final Victory",
-      artist: "Haggard",
-      cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/5.jpg",
-      source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/5.mp3",
-      url: "https://www.youtube.com/watch?v=0WlpALnQdN8",
-      favorited: true
-    },
-    {
-      name: "Genius ft. Sia, Diplo, Labrinth",
-      artist: "LSD",
-      cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/6.jpg",
-      source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/6.mp3",
-      url: "https://www.youtube.com/watch?v=HhoATZ1Imtw",
-      favorited: false
-    },
-    {
-      name: "The Comeback Kid",
-      artist: "Lindi Ortega",
-      cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/7.jpg",
-      source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/7.mp3",
-      url: "https://www.youtube.com/watch?v=me6aoX0wCV8",
-      favorited: true
-    },
-    {
-      name: "Overdose",
-      artist: "Grandson",
-      cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/8.jpg",
-      source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/8.mp3",
-      url: "https://www.youtube.com/watch?v=00-Rl3Jlx-o",
-      favorited: false
-    },
-    {
-      name: "Rag'n'Bone Man",
-      artist: "Human",
-      cover: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/9.jpg",
-      source: "https://raw.githubusercontent.com/muhammederdem/mini-player/master/mp3/9.mp3",
-      url: "https://www.youtube.com/watch?v=L3wKzyIN1yk",
-      favorited: false
-    }
-  ];
+  useEffect(() => {
+    const audio = audioRef.current;
 
-  // Define your other state variables and functions here
-  const clickProgress = () => {
+    const handleEnded = () => {
+      setIsTimerPlaying(false);
+    };
 
-  }
+    audio?.addEventListener('ended', handleEnded);
+
+    return () => {
+      audio?.removeEventListener('ended', handleEnded);
+    };
+  }, []);
 
   const favorite = () => {
-    console.log('hello world')
-  }
+    dispatch(favourite(tracks[currentTrackIndex].id))
+  };
 
   const prevTrack = () => {
-    console.log('hello world')
-  }
+    setCurrentTrackIndex((prevIndex) => (prevIndex === 0 ? tracks.length - 1 : prevIndex - 1));
+    setIsTimerPlaying(true);
+  };
 
   const nextTrack = () => {
-    console.log('hello world')
-  }
+    setCurrentTrackIndex((prevIndex) => (prevIndex === tracks.length - 1 ? 0 : prevIndex + 1));
+    setIsTimerPlaying(true);
+  };
+
+  const isPlaying = () => {
+    const audio = audioRef.current;
+
+    if (isTimerPlaying) {
+      audio?.play();
+    } else {
+      audio?.pause();
+    }
+  };
 
   const play = () => {
-    console.log('hello world')
-  }
+    isPlaying();
+    setIsTimerPlaying(!isTimerPlaying);
+  };
 
   const showMenu = () => {
     document.querySelector('.menu')?.classList.toggle('hidden')
+  }
+
+  if (loading) {
+    return (<section className="h-screen flex items-center dark:bg-slate-700 bg-[#dfe7ef]"> <div className="w-12 h-12 mx-auto rounded-full animate-spin border-2 border-dashed border-blue-500 border-t-transparent"></div></section>)
   }
 
 
@@ -147,21 +96,21 @@ const YourComponent: React.FC = () => {
         </aside>
       </section>
       <div className="player dark:bg-slate-900 bg-[#eef3f7] mr-2">
+        <p className="dark:text-white">{status}</p>
         <div className="player__top">
           <div className="player-cover">
             {/* Add your transition group logic here */}
-            {tracks.map((track, $index) => (
+            {tracks.map((track: any, $index: number) => (
               $index === currentTrackIndex ? (
-                <div key={$index} className="player-cover__item" style={{ backgroundImage: `url(${track.cover})` }}></div>
+                <div key={$index} className="player-cover__item" style={{ backgroundImage: `url(${track.favicon})` }}></div>
               ) : null
             ))}
           </div>
           <div className="player-controls">
-            {/* Add your favorite, link, prev, next, and play buttons here */}
             <aside onClick={showMenu} className="player-controls__item inline-flex">
               <Menu />
             </aside>
-            <div className={`player-controls__item -favorite inline-flex ${currentTrack.favorited ? "active" : ""}`} onClick={favorite}>
+            <div className={`player-controls__item -favorite inline-flex ${tracks[currentTrackIndex].favorited ? 'active' : ''}`} onClick={favorite}>
               <Heart />
             </div>
             <div className="player-controls__item inline-flex" onClick={prevTrack}>
@@ -181,21 +130,14 @@ const YourComponent: React.FC = () => {
         </div>
         <div className="progress" ref={progressRef}>
           <div className="progress__top">
-            {/* Add album info and duration here */}
             {currentTrack ? <div className="album-info" v-if="currentTrack">
-              <div className="album-info__name">{currentTrack.artist}</div>
-              <div className="album-info__track">{currentTrack.name}</div>
+              <div className="album-info__name">{tracks[currentTrackIndex].name}</div>
+              <div className="album-info__track">{tracks[currentTrackIndex].country}</div>
             </div> : null
             }
-            <div className="progress__duration">{duration}</div>
           </div>
-          <div className="progress__bar" onClick={clickProgress}>
-            {/* Add progress bar and current time here */}
-            <div className="progress__current" style={{ width: barWidth }}></div>
-          </div>
+          <audio ref={audioRef} src={tracks[currentTrackIndex].url_resolved}></audio>
         </div>
-        {/* Add the remaining parts of your player component here */}
-        <div className="progress__time">{currentTime}</div>
       </div>
       <Outlet />
     </div >
