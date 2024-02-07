@@ -7,17 +7,18 @@ import { fetchChannels, favourite } from "../redux/reducers/channelSlice";
 
 const YourComponent: React.FC = () => {
   const dispatch = useDispatch()
-  const { data, status, loading } = useSelector((state: any) => state.channelSlice)
+  const { data, status, loading } = useSelector((state: any) => state.channelSlice);
 
+  
   useEffect(() => {
     dispatch(fetchChannels());
   }, [dispatch]);
-
+  
   const [currentTrack, setCurrentTrack] = useState<any>({ favorited: false })
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [isTimerPlaying, setIsTimerPlaying] = useState<boolean>(true);
-  const tracks = data;
-
+  const tracks = Object.keys(data).length < 1 ? [{}] : data;
+  
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressRef = useRef<HTMLDivElement>(null);
 

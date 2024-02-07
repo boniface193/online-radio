@@ -6,6 +6,7 @@ export const fetchChannels: any = createAsyncThunk('channels/fetchChennels', asy
     const res = await axios.get('/stations');
     return res.data;
   } catch (error) {
+    console.log(error)
     throw error;
   }
 });
@@ -32,6 +33,19 @@ const channelSlice = createSlice({
       state.rows += 10
     },
     favourite: (state, { payload }) => {
+      const favoriteItem: any = [];
+
+      const favorite: any = {
+        id: payload
+      }
+
+      const storage = localStorage.getItem('favorite');
+
+      if (storage !== null) {
+        favoriteItem.push(favorite);
+        localStorage.setItem('favorite', JSON.stringify(favoriteItem))
+      }
+
       const newState = state.data.map((item) => {
         if (item.id !== payload) return item;
         return { ...item, favorited: !item.favorited }
