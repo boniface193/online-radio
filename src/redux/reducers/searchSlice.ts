@@ -9,12 +9,7 @@ interface Parameters {
 export const fetchSearch: any = createAsyncThunk('search/fetchSearch', async (arg: Parameters) => {
 
   try {
-    const res = await axios.get(`/stations/byname/${arg.searchName}`, {
-      params: {
-        offset: '0',
-        limit: arg.limit,
-      },
-    });
+    const res = await axios.get(`/stations`);
     return res.data;
   } catch (error) {
     throw error;
@@ -23,18 +18,18 @@ export const fetchSearch: any = createAsyncThunk('search/fetchSearch', async (ar
 
 interface searchState {
   data: any[],
-  currentPage: number,
+  searchedResult: any[],
   rows: number,
-  totalPage: any[],
+  lessThan10: boolean,
   status: string,
   loading: boolean
 }
 
 const initialState: searchState = {
   data: [],
-  currentPage: 1,
+  searchedResult: [],
   rows: 10,
-  totalPage: ['1', '2', '3', '4'],
+  lessThan10: false,
   status: "",
   loading: false
 }
@@ -43,10 +38,18 @@ const searchSlice = createSlice({
   name: 'getSearch',
   initialState,
   reducers: {
-    incrementCurrentPage: (state) => {
-      if (state.currentPage <= state.totalPage.length - 1) {
-        state.currentPage++;
-        state.rows += 10
+    getFormValue: (state, { payload }) => {
+      try {
+        const results = state.data.filter((item) => item.name.toLowerCase().indexOf(payload) > -1);
+        if (results.length < 1) {
+          state.status = 'Ops! Nothing'
+          state.searchedResult = [];
+        } else {
+          state.status = ''
+          state.searchedResult = results;
+        }
+      } catch (error) {
+        throw error
       }
     },
   },
@@ -57,7 +60,7 @@ const searchSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchSearch.fulfilled, (state, { payload }) => {
-        state.data = payload.data;
+        state.data = payload;
         state.loading = false;
       })
       .addCase(fetchSearch.rejected, (state) => {
@@ -68,4 +71,4 @@ const searchSlice = createSlice({
 })
 
 export default searchSlice.reducer;
-export const { incrementCurrentPage } = searchSlice.actions;
+export const { getFormValue } = searchSlice.actions;

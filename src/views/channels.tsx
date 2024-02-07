@@ -25,90 +25,24 @@ const Channels = () => {
   return <Modal hight="h-[32rem]" title="Channel">
     <div className="px-8 mb-8 overflow-y-auto h-[25rem]">
       <p className="text-red-500 text-center my-8">{status}</p>
-      <Link replace to={`/chapters/`}>
-        <div className="bg-slate-200 space-x-4 flex cursor-pointer mb-4 dark:bg-slate-800 h-auto rounded-lg p-2 space-y-2 ">
-          <img src="https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/8.jpg" className="w-12" alt="search result pic" />
-          <div>
-            <p className="text-sm font-semibold capitalize">Nobis harum nam et.</p>
-            <p className="text-sm">Lorem ipsum dolor sit amet.</p>
+      {data.map((item: any, index: number) => (
+        <Link key={index} replace to={`/`}>
+          <div className="bg-slate-200 space-x-4 flex cursor-pointer mb-4 dark:bg-slate-800 h-auto rounded-lg p-2 space-y-2 ">
+            <img src={item.favicon} className="w-12" alt="studio pictures" />
+            <div>
+              <p className="text-sm font-semibold capitalize">{item.name}</p>
+              <p className="text-sm">{item.country}</p>
+            </div>
           </div>
-        </div>
-      </Link>
-      <Link replace to={`/chapters/`}>
-        <div className="bg-slate-200 space-x-4 flex cursor-pointer mb-4 dark:bg-slate-800 h-auto rounded-lg p-2 space-y-2 ">
-          <img src="https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/8.jpg" className="w-12" alt="search result pic" />
-          <div>
-            <p className="text-sm font-semibold capitalize">Nobis harum nam et.</p>
-            <p className="text-sm">Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-      </Link>
-      <Link replace to={`/chapters/`}>
-        <div className="bg-slate-200 space-x-4 flex cursor-pointer mb-4 dark:bg-slate-800 h-auto rounded-lg p-2 space-y-2 ">
-          <img src="https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/8.jpg" className="w-12" alt="search result pic" />
-          <div>
-            <p className="text-sm font-semibold capitalize">Nobis harum nam et.</p>
-            <p className="text-sm">Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-      </Link>
-      <Link replace to={`/chapters/`}>
-        <div className="bg-slate-200 space-x-4 flex cursor-pointer mb-4 dark:bg-slate-800 h-auto rounded-lg p-2 space-y-2 ">
-          <img src="https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/8.jpg" className="w-12" alt="search result pic" />
-          <div>
-            <p className="text-sm font-semibold capitalize">Nobis harum nam et.</p>
-            <p className="text-sm">Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-      </Link>
-      <Link replace to={`/chapters/`}>
-        <div className="bg-slate-200 space-x-4 flex cursor-pointer mb-4 dark:bg-slate-800 h-auto rounded-lg p-2 space-y-2 ">
-          <img src="https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/8.jpg" className="w-12" alt="search result pic" />
-          <div>
-            <p className="text-sm font-semibold capitalize">Nobis harum nam et.</p>
-            <p className="text-sm">Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-      </Link>
-      <Link replace to={`/chapters/`}>
-        <div className="bg-slate-200 space-x-4 flex cursor-pointer mb-4 dark:bg-slate-800 h-auto rounded-lg p-2 space-y-2 ">
-          <img src="https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/8.jpg" className="w-12" alt="search result pic" />
-          <div>
-            <p className="text-sm font-semibold capitalize">Nobis harum nam et.</p>
-            <p className="text-sm">Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-      </Link>
-      <Link replace to={`/chapters/`}>
-        <div className="bg-slate-200 space-x-4 flex cursor-pointer mb-4 dark:bg-slate-800 h-auto rounded-lg p-2 space-y-2 ">
-          <img src="https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/8.jpg" className="w-12" alt="search result pic" />
-          <div>
-            <p className="text-sm font-semibold capitalize">Nobis harum nam et.</p>
-            <p className="text-sm">Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-      </Link>
-      <Link replace to={`/chapters/`}>
-        <div className="bg-slate-200 space-x-4 flex cursor-pointer mb-4 dark:bg-slate-800 h-auto rounded-lg p-2 space-y-2 ">
-          <img src="https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/8.jpg" className="w-12" alt="search result pic" />
-          <div>
-            <p className="text-sm font-semibold capitalize">Nobis harum nam et.</p>
-            <p className="text-sm">Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-      </Link>
-      <Link replace to={`/chapters/`}>
-        <div className="bg-slate-200 space-x-4 flex cursor-pointer mb-4 dark:bg-slate-800 h-auto rounded-lg p-2 space-y-2 ">
-          <img src="https://raw.githubusercontent.com/muhammederdem/mini-player/master/img/8.jpg" className="w-12" alt="search result pic" />
-          <div>
-            <p className="text-sm font-semibold capitalize">Nobis harum nam et.</p>
-            <p className="text-sm">Lorem ipsum dolor sit amet.</p>
-          </div>
-        </div>
-      </Link>
-      <div className="flex justify-center my-5" onClick={nextPage}>
-        <button className="shadow-lg drop-shadow-xl bg-slate-200 p-2 rounded-lg text-sm uppercase">Load More</button>
-      </div>
+        </Link>
+      ))}
+
+      {
+        status === '' ? <div className="flex justify-center my-5" onClick={nextPage}>
+          <button className="shadow-lg drop-shadow-xl bg-slate-200 p-2 rounded-lg text-sm uppercase">Load More</button>
+        </div> : ''
+      }
+
     </div>
   </Modal>
 };

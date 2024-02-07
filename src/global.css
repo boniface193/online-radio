@@ -433,8 +433,6 @@
   opacity: 0;
 }
 
-/*# sourceMappingURL=main.css.map */
-
 input[type='search'] {
   @apply h-16 px-8 w-full placeholder-slate-900 bg-inherit outline-none placeholder:text-slate-800 dark:placeholder:text-slate-400 dark:text-white text-slate-800 rounded-lg;
 }
