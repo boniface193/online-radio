@@ -14,6 +14,7 @@ const YourComponent: React.FC = () => {
     dispatch(fetchChannels());
   }, [dispatch]);
   
+  // eslint-disable-next-line
   const [currentTrack, setCurrentTrack] = useState<any>({ favorited: false })
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
   const [isTimerPlaying, setIsTimerPlaying] = useState<boolean>(true);
